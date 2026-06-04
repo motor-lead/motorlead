@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MotorLead — Agence Marketing Automobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #5BB8F5;
+      --sky-light: #A8D8F8;
+      --sky-pale: #E8F5FF;
+      --sky-deep: #2A9AE0;
+      --navy: #0D1F35;
+      --navy-mid: #1A3150;
+      --white: #FAFCFF;
+      --grey: #6B8099;
+      --grey-light: #D4E8F7;
+      --accent: #FF6B35;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--sky-pale); }
+    ::-webkit-scrollbar-thumb { background: var(--sky); border-radius: 3px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5vw;
+      background: rgba(250, 252, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(91, 184, 245, 0.15);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(42, 154, 224, 0.12); }
+
+    .logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.45rem;
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+    .logo span { color: var(--sky-deep); }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--grey);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sky-deep); }
+
+    .nav-cta {
+      background: var(--sky-deep);
+      color: var(--white) !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 500 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--navy) !important; transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 5vw 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(91,184,245,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 80%, rgba(42,154,224,0.10) 0%, transparent 55%);
+    }
+
+    /* Animated grid */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(91,184,245,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(91,184,245,0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 20s linear infinite;
+    }
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(60px); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(91,184,245,0.12);
+      border: 1px solid rgba(91,184,245,0.35);
+      color: var(--sky-deep);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--sky-deep);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--sky-deep);
+      position: relative;
+    }
+    h1 em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--sky), var(--sky-deep));
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underline 0.6s 0.8s ease forwards;
+    }
+    @keyframes underline { to { transform: scaleX(1); } }
+
+    .hero p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--grey);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--sky-deep);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 8px 32px rgba(42,154,224,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(42,154,224,0.3);
+    }
+    .btn-primary svg { transition: transform 0.2s; }
+    .btn-primary:hover svg { transform: translateX(3px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1.5px solid var(--grey-light);
+      color: var(--navy-mid);
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--sky-deep);
+      color: var(--sky-deep);
+      background: rgba(91,184,245,0.05);
+    }
+
+    .hero-visual {
+      position: absolute;
+      right: 3vw; top: 50%;
+      transform: translateY(-50%);
+      width: min(480px, 42vw);
+      z-index: 1;
+      animation: fadeLeft 0.8s 0.2s ease both;
+    }
+
+    .phone-mockup {
+      position: relative;
+      width: 220px;
+      margin: 0 auto;
+    }
+
+    .phone-frame {
+      background: var(--navy);
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow:
+        0 40px 80px rgba(13,31,53,0.25),
+        0 0 0 2px rgba(91,184,245,0.2),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .phone-screen {
+      background: #0a0a0a;
+      border-radius: 26px;
+      overflow: hidden;
+      aspect-ratio: 9/19;
+      position: relative;
+    }
+
+    .tiktok-feed {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .feed-item {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      background: linear-gradient(135deg, #1a2a3a, #0d1f35);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      animation: shimmer 3s ease infinite;
+    }
+    .feed-item:nth-child(2) { animation-delay: 1s; background: linear-gradient(135deg, #0d1f35, #1a3050); }
+    .feed-item:nth-child(3) { animation-delay: 2s; background: linear-gradient(135deg, #162840, #0d2030); }
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.15); }
+    }
+
+    .feed-car-icon {
+      font-size: 2rem;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      opacity: 0.6;
+    }
+
+    .feed-info { color: white; font-size: 0.45rem; line-height: 1.4; }
+    .feed-info strong { display: block; font-size: 0.5rem; margin-bottom: 2px; }
+
+    .feed-likes {
+      position: absolute; right: 8px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .feed-likes span { font-size: 0.5rem; color: rgba(255,255,255,0.7); }
+
+    .stats-float {
+      position: absolute;
+      background: white;
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--navy);
+      animation: float 3s ease-in-out infinite;
+    }
+    .stats-float.s1 { left: -60px; top: 20%; animation-delay: 0s; }
+    .stats-float.s2 { right: -50px; bottom: 30%; animation-delay: 1.5s; }
+    .stats-float .num { font-family: var(--font-head); font-size: 1.1rem; color: var(--sky-deep); display: block; }
+    .stats-float .lbl { color: var(--grey); font-weight: 400; font-size: 0.65rem; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateY(-50%) translateX(40px); }
+      to { opacity: 1; transform: translateY(-50%) translateX(0); }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 6rem 5vw; }
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sky-deep);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--grey);
+      line-height: 1.7;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    /* ─── PROBLEM ─── */
+    .problem {
+      background: var(--navy);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .problem::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(91,184,245,0.08) 0%, transparent 60%);
+    }
+    .problem .section-tag { color: var(--sky-light); }
+    .problem h2 { color: var(--white); }
+    .problem .section-sub { color: rgba(255,255,255,0.55); }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .problem-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(91,184,245,0.12);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--sky), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .problem-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-4px); }
+    .problem-card:hover::before { opacity: 1; }
+
+    .problem-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(91,184,245,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.4rem;
+    }
+
+    .problem-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .problem-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+    /* ─── SERVICES ─── */
+    .services { background: var(--sky-pale); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2.2rem;
+      border: 1px solid rgba(91,184,245,0.15);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--sky-deep));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(91,184,245,0.15); }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-num {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 800;
+      color: rgba(91,184,245,0.15);
+      line-height: 1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.05em;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .service-card p { font-size: 0.88rem; color: var(--grey); line-height: 1.7; }
+
+    .service-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      background: rgba(91,184,245,0.1);
+      color: var(--sky-deep);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+    }
+
+    /* ─── OFFRE ─── */
+    .offre {
+      background: var(--white);
+      text-align: center;
+    }
+    .offre-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .offre h2, .offre .section-tag { text-align: center; }
+    .offre .section-sub { text-align: center; margin: 0 auto 3rem; }
+
+    .pricing-card {
+      background: var(--navy);
+      border-radius: 32px;
+      padding: 3.5rem;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--sky-deep), var(--accent));
+    }
+    .pricing-card::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(91,184,245,0.08), transparent 70%);
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: rgba(91,184,245,0.15);
+      border: 1px solid rgba(91,184,245,0.3);
+      color: var(--sky-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pricing-title {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+      font-family: var(--font-head);
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--sky);
+      margin: 1rem 0;
+    }
+    .pricing-price sub { font-size: 1.2rem; color: rgba(255,255,255,0.4); vertical-align: baseline; margin-right: 0.2rem; }
+    .pricing-price span { font-size: 1rem; color: rgba(255,255,255,0.4); font-weight: 400; letter-spacing: 0; }
+
+    .pricing-desc { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 2.5rem; }
+
+    .pricing-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      text-align: left;
+      margin-bottom: 2.5rem;
+    }
+
+    .feat {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.9rem; color: rgba(255,255,255,0.8);
+    }
+    .feat::before {
+      content: '✓';
+      width: 22px; height: 22px; min-width: 22px;
+      background: rgba(91,184,245,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      color: var(--sky);
+      margin-top: 1px;
+    }
+
+    .pricing-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--sky-deep);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 8px 32px rgba(42,154,224,0.35);
+    }
+    .pricing-cta:hover {
+      background: var(--sky);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(91,184,245,0.4);
+    }
+
+    /* ─── VISION ─── */
+    .vision {
+      background: var(--sky-pale);
+    }
+    .vision-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2rem;
+    }
+
+    .tl-item {
+      display: flex; gap: 1.5rem;
+      position: relative;
+    }
+    .tl-item:not(:last-child) .tl-line {
+      position: absolute;
+      left: 20px; top: 44px;
+      width: 2px;
+      height: calc(100% - 8px);
+      background: linear-gradient(180deg, var(--sky), transparent);
+    }
+
+    .tl-dot {
+      width: 42px; height: 42px; min-width: 42px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--sky);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      margin-top: 4px;
+      position: relative; z-index: 1;
+      transition: all 0.3s;
+    }
+    .tl-item:hover .tl-dot {
+      background: var(--sky-deep);
+      border-color: var(--sky-deep);
+    }
+
+    .tl-content { padding: 0 0 2.5rem; }
+    .tl-content h4 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .tl-content p { font-size: 0.85rem; color: var(--grey); line-height: 1.65; }
+    .tl-phase {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--sky-deep);
+      margin-bottom: 0.2rem;
+    }
+
+    .vision-right {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 2.5rem;
+      border: 1px solid rgba(91,184,245,0.2);
+    }
+
+    .vision-right h3 {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .vision-right p {
+      font-size: 0.9rem;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .target-list {
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .target-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--sky-pale);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--navy-mid);
+      transition: all 0.2s;
+    }
+    .target-item:hover { background: rgba(91,184,245,0.15); transform: translateX(4px); }
+    .target-icon { font-size: 1.2rem; }
+
+    /* ─── CTA FINAL ─── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--sky-deep) 0%, var(--navy) 60%);
+      color: white;
+      text-align: center;
+      padding: 6rem 5vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 80% at 20% 50%, rgba(91,184,245,0.12), transparent),
+        radial-gradient(ellipse 40% 60% at 80% 30%, rgba(255,255,255,0.04), transparent);
+    }
+
+    .cta-section h2 {
+      color: white;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    .cta-actions {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      position: relative;
+    }
+
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: white;
+      color: var(--sky-deep);
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      padding: 2.5rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .logo { color: rgba(255,255,255,0.8); font-size: 1.2rem; }
+    footer p { font-size: 0.82rem; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-visual { display: none; }
+      .hero-content { max-width: 100%; }
+      .vision-inner { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      h1 { letter-spacing: -0.03em; }
+      .pricing-card { padding: 2rem 1.5rem; }
+      .pricing-features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="logo">Motor<span>Lead</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#offre">Offre</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="#contact" class="nav-cta">Démarrer</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Agence Marketing Automobile</div>
+      <h1>Votre garage,<br/><em>visible</em> sur les réseaux.</h1>
+      <p>MotorLead crée et gère votre contenu Instagram &amp; TikTok pour que vos clients locaux vous trouvent — sans que vous ayez à lever le petit doigt.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Prendre contact
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#services" class="btn-ghost">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          Voir nos services
+        </a>
+      </div>
+    </div>
+
+    <!-- Phone visual -->
+    <div class="hero-visual">
+      <div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="tiktok-feed">
+              <div class="feed-item">
+                <div class="feed-car-icon">🔧</div>
+                <div class="feed-info">
+                  <strong>@garage_martin</strong>
+                  Changement de courroie en 60s ⚡
+                </div>
+                <div class="feed-likes">
+                  <span>❤️</span><span>2.4K</span>
+                </div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-car-icon">🚗</div>
+                <div class="feed-info">
+                  <strong>@garage_martin</strong>
+                  Avant / Après carrosserie 🤯
+                </div>
+                <div class="feed-likes">
+                  <span>❤️</span><span>5.1K</span>
+                </div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-car-icon">🏎️</div>
+                <div class="feed-info">
+                  <strong>@garage_martin</strong>
+                  Conseils entretien moteur
+                </div>
+                <div class="feed-likes">
+                  <span>❤️</span><span>3.8K</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-float s1">
+          <span class="num">+1 200</span>
+          <span class="lbl">abonnés / mois</span>
+        </div>
+        <div class="stats-float s2">
+          <span class="num">×3</span>
+          <span class="lbl">appels entrants</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLÈME -->
+  <section class="problem reveal">
+    <div class="section-tag">Le constat</div>
+    <h2>Les garages sont invisibles<br/>sur les réseaux sociaux.</h2>
+    <p class="section-sub">Pas par manque d'expertise — mais par manque de temps et de ressources pour créer du contenu.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">⏱️</div>
+        <h3>Zéro temps disponible</h3>
+        <p>Entre les diagnostics, les réparations et la gestion du planning, personne ne peut s'occuper des réseaux sociaux.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📵</div>
+        <h3>Comptes abandonnés</h3>
+        <p>La plupart des garages ont un compte Instagram créé il y a des années… avec 3 posts et aucune activité récente.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🎬</div>
+        <h3>Pas de compétences vidéo</h3>
+        <p>Créer des Reels ou TikToks de qualité nécessite du montage, de la narration, une stratégie — tout sauf évident.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📍</div>
+        <h3>Visibilité locale nulle</h3>
+        <p>Les clients potentiels du quartier ne savent pas que vous existez — ils vont chez le concurrent qui poste régulièrement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services reveal" id="services">
+    <div class="section-tag">Ce que l'on fait</div>
+    <h2>Tout ce qu'il faut pour<br/>briller en ligne.</h2>
+    <p class="section-sub">MotorLead prend en charge l'intégralité de votre présence sur Instagram &amp; TikTok.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Tournage de vidéos courtes</h3>
+        <p>Réparations en accéléré, avant/après, conseils pratiques, véhicules remarquables… On capture ce qui fait votre quotidien.</p>
+        <span class="service-tag">📹 Reels & TikTok</span>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Montage professionnel</h3>
+        <p>Cuts dynamiques, sous-titres, musique tendance, visuels de marque — chaque vidéo est montée pour accrocher dès la première seconde.</p>
+        <span class="service-tag">✂️ Editing premium</span>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Gestion des comptes</h3>
+        <p>On s'occupe de tout : publication, hashtags, légendes, réponses aux commentaires. Votre compte tourne sans vous.</p>
+        <span class="service-tag">📲 Community management</span>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Stratégie de contenu</h3>
+        <p>Planning éditorial mensuel, idées de formats, conseils personnalisés pour que votre audience grossisse semaine après semaine.</p>
+        <span class="service-tag">🧭 Stratégie</span>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>Accompagnement dédié</h3>
+        <p>Un interlocuteur unique, des reportings clairs, des ajustements en continu. Vous savez toujours où en est votre croissance.</p>
+        <span class="service-tag">🤝 Suivi mensuel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFRE -->
+  <section class="offre reveal" id="offre">
+    <div class="offre-wrap">
+      <div class="section-tag">L'offre</div>
+      <h2>Simple. Transparent.<br/>Efficace.</h2>
+      <p class="section-sub">Un abonnement mensuel tout inclus — vous vous concentrez sur la mécanique, on s'occupe du reste.</p>
+
+      <div class="pricing-card">
+        <span class="pricing-badge">⭐ Abonnement mensuel</span>
+        <div class="pricing-title">Pack Visibilité Locale</div>
+        <div class="pricing-price"><sub>À partir de</sub> 497€ <span>/ mois</span></div>
+        <div class="pricing-desc">Sans engagement. Sans surprise. Résiliable à tout moment.</div>
+
+        <div class="pricing-features">
+          <div class="feat">8 à 12 vidéos courtes par mois</div>
+          <div class="feat">Montage professionnel inclus</div>
+          <div class="feat">Publication sur Instagram &amp; TikTok</div>
+          <div class="feat">Légendes + hashtags optimisés</div>
+          <div class="feat">Planning éditorial mensuel</div>
+          <div class="feat">Reporting mensuel des résultats</div>
+          <div class="feat">Un interlocuteur dédié</div>
+          <div class="feat">Ajustements illimités</div>
+        </div>
+
+        <a href="#contact" class="pricing-cta">
+          Demander un audit gratuit
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="vision reveal" id="vision">
+    <div class="vision-inner">
+      <div>
+        <div class="section-tag">Vision long terme</div>
+        <h2>Bien plus qu'une agence<br/>de contenu.</h2>
+        <p class="section-sub">Notre ambition : devenir le partenaire de croissance incontournable des professionnels de l'automobile.</p>
+
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-line"></div>
+            <div class="tl-dot">🎬</div>
+            <div class="tl-content">
+              <div class="tl-phase">Phase 1 — Aujourd'hui</div>
+              <h4>Création &amp; gestion de contenu</h4>
+              <p>Vidéos courtes, montage, gestion des comptes Instagram &amp; TikTok pour booster votre visibilité locale.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-line"></div>
+            <div class="tl-dot">🌐</div>
+            <div class="tl-content">
+              <div class="tl-phase">Phase 2 — À venir</div>
+              <h4>Sites web &amp; prise de rendez-vous</h4>
+              <p>Des sites vitrines modernes avec système de réservation intégré pour convertir vos visiteurs en clients.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-line"></div>
+            <div class="tl-dot">🚀</div>
+            <div class="tl-content">
+              <div class="tl-phase">Phase 3 — Demain</div>
+              <h4>Publicité &amp; génération de prospects</h4>
+              <p>Campagnes Meta Ads &amp; Google Ads ciblées localement pour remplir votre agenda de nouveaux clients.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-right">
+        <h3>Pour qui travaille<br/>MotorLead ?</h3>
+        <p>Tout professionnel de l'automobile qui veut développer sa clientèle locale grâce aux réseaux sociaux.</p>
+        <div class="target-list">
+          <div class="target-item">
+            <span class="target-icon">🔧</span>
+            Garages indépendants
+          </div>
+          <div class="target-item">
+            <span class="target-icon">🏢</span>
+            Centres auto multiservices
+          </div>
+          <div class="target-item">
+            <span class="target-icon">⚙️</span>
+            Mécaniciens spécialisés
+          </div>
+          <div class="target-item">
+            <span class="target-icon">🎨</span>
+            Carrossiers &amp; peintres
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section" id="contact">
+    <h2>Prêt à remplir votre garage<br/>grâce aux réseaux ?</h2>
+    <p>On commence par un audit gratuit de votre présence en ligne. Sans engagement, sans jargon.</p>
+    <div class="cta-actions">
+      <a href="mailto:contact@motorlead.fr" class="btn-white">
+        📩 Nous écrire
+      </a>
+      <a href="tel:+33600000000" class="btn-outline-white">
+        📞 Nous appeler
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="logo">Motor<span>Lead</span></a>
+    <p>© 2025 MotorLead. Agence marketing automobile.</p>
+    <p>📍 France · Instagram · TikTok</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Stagger children reveal
+    document.querySelectorAll('.problem-grid, .services-grid, .pricing-features, .target-list').forEach(grid => {
+      const children = grid.querySelectorAll(':scope > *');
+      children.forEach((child, i) => {
+        child.style.transitionDelay = `${i * 0.08}s`;
+      });
+    });
+  </script>
+</body>
+</html>
